@@ -13,6 +13,12 @@ class TaskListAdapter(): ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskD
 
     class TaskViewHolder(private val binding: TaskListItemBinding) :RecyclerView.ViewHolder(binding.root) {
 
+        init{
+            binding.root.setOnClickListener{
+
+            }
+        }
+
         fun bind(task:Task) {
             binding.taskTitle.text = task.title
             binding.taskBody.text = task.body
