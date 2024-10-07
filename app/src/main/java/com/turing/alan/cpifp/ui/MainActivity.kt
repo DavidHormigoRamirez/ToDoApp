@@ -45,8 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun toDetail(view: View){
+    private fun toDetail(task: Task){
         val intent = Intent(this, TaskDetailActivity::class.java)
+        intent.putExtra("TASK_ID",task.id)
         startActivity(intent)
     }
 }
