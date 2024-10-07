@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.turing.alan.cpifp.data.Task
 import com.turing.alan.cpifp.databinding.TaskListItemBinding
 
-class TaskListAdapter(): ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskDiffCallback) {
+class TaskListAdapter(private val toItemDetail:((View)->Unit)): ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskDiffCallback) {
 
-    class TaskViewHolder(private val binding: TaskListItemBinding) :RecyclerView.ViewHolder(binding.root) {
+    inner class TaskViewHolder(private val binding: TaskListItemBinding) :RecyclerView.ViewHolder(binding.root) {
 
         init{
-            binding.root.setOnClickListener{
-
-            }
+            binding.root.setOnClickListener{ toItemDetail(binding.root) }
         }
 
         fun bind(task:Task) {
@@ -30,10 +28,7 @@ class TaskListAdapter(): ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskD
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding:TaskListItemBinding = TaskListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+            LayoutInflater.from(parent.context), parent, false)
         return TaskViewHolder(binding)
     }
 
